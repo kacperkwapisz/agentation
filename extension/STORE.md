@@ -11,7 +11,7 @@ Or run the walkthrough:
 ## Privacy policy URL
 
 ```
-https://github.com/kacperkwapisz/agentation/blob/feat/chrome-extension/extension/PRIVACY.md
+https://github.com/kacperkwapisz/agentation/blob/main/extension/PRIVACY.md
 ```
 
 ## Name
