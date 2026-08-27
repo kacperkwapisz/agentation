@@ -23,17 +23,17 @@ Agentation
 ## Short description (132 characters max)
 
 ```
-Annotate localhost pages and copy structured feedback for AI coding agents. Nothing to add to your project.
+Annotate any web page and copy structured feedback for AI coding agents. Nothing to add to your project.
 ```
 
 ## Detailed description
 
 ```
-A floating toolbar on localhost. Click an element, leave a note, copy markdown with the CSS selector and where it sits on the page. Paste that into Claude Code, Cursor, Codex, or any other agent.
+A floating toolbar on the current page. Click an element, leave a note, copy markdown with the CSS selector and where it sits on the page. Paste that into Claude Code, Cursor, Codex, or any other agent.
 
 This is the same toolbar as `npm install agentation`. If the page already renders <Agentation />, the extension does not mount a second copy.
 
-It only runs on localhost and 127.0.0.1. If agentation-mcp is running on port 4747, annotations can sync to the agent without copy-paste.
+If agentation-mcp is running on port 4747, annotations can sync to the agent without copy-paste.
 ```
 
 ## Category
@@ -47,15 +47,15 @@ English
 ## Single purpose
 
 ```
-Show the Agentation toolbar on localhost so you can annotate a page and copy selectors for an AI coding agent.
+Show the Agentation toolbar on web pages so you can annotate them and copy selectors for an AI coding agent.
 ```
 
 ## Permission justifications
 
-Host permissions (`http://localhost/*`, `http://127.0.0.1/*`, `https://localhost/*`):
+Host permissions (`http://*/*`, `https://*/*`):
 
 ```
-Needed to inject the toolbar on local dev pages, and to ping http://localhost:4747/health if you are running the Agentation MCP server. It does not run on other sites.
+Needed to inject the toolbar on the page you are looking at, read the element you click (tag, classes, position), and ping http://localhost:4747/health if you are running the Agentation MCP server. The extension does not collect that data or send it off your machine.
 ```
 
 Remote code: none. Data use: none.

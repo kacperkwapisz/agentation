@@ -50,7 +50,7 @@ Agentation captures class names, selectors, and element positions so AI agents c
 
 ## Chrome Extension
 
-Use Agentation on any localhost page without adding it to your project. See [extension/README.md](./extension/README.md) for install instructions.
+Use Agentation on any web page without adding it to your project. See [extension/README.md](./extension/README.md) for install instructions.
 
 ## Requirements
 

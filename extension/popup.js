@@ -4,17 +4,23 @@ const mcpStatus = document.getElementById("mcp-status");
 const mcpDot = document.getElementById("mcp-dot");
 const mcpValue = document.getElementById("mcp-value");
 
-// Check if the toolbar is active on the current tab by matching
-// against the content script patterns from manifest.json
-const CONTENT_SCRIPT_PATTERNS = [
-  /^http:\/\/localhost(:\d+)?\//,
-  /^http:\/\/127\.0\.0\.1(:\d+)?\//,
-  /^https:\/\/localhost(:\d+)?\//,
-];
+function isInjectable(url) {
+  if (!url) return false;
+  try {
+    const { protocol, hostname } = new URL(url);
+    if (protocol !== "http:" && protocol !== "https:") return false;
+    if (hostname === "chrome.google.com" || hostname === "chromewebstore.google.com") {
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
   const url = tabs[0]?.url || "";
-  const isActive = CONTENT_SCRIPT_PATTERNS.some((p) => p.test(url));
+  const isActive = isInjectable(url);
 
   if (isActive) {
     toolbarDot.className = "dot active";

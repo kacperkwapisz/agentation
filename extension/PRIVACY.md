@@ -10,13 +10,13 @@ The extension does not collect personal information. It does not include analyti
 
 ## Where data lives
 
-The extension only runs on local development pages (`localhost` and `127.0.0.1`). Annotations you create are stored in that page's `localStorage`, on your machine.
+The toolbar is injected on http and https pages. Annotations you create are stored in that page's `localStorage`, on your machine. They never leave the browser unless you copy them or you are running the optional local MCP server.
 
-If you are running the optional Agentation MCP server locally, the extension may send annotation data to `http://localhost:4747`. That server runs on your computer. Nothing is sent to Agentation or any third party.
+If you are running the Agentation MCP server locally, the extension may send annotation data to `http://localhost:4747`. That server runs on your computer. Nothing is sent to Agentation or any third party.
 
 ## Permissions
 
-Host access is limited to local development URLs so the toolbar can appear on your own projects and, if present, talk to a local MCP server. The extension cannot read or change other websites.
+The extension needs access to http and https pages so it can show the toolbar and read the element you click (tag, CSS classes, position). It does not read your cookies, account data, or form passwords. It does not run on the Chrome Web Store.
 
 ## Clipboard
 

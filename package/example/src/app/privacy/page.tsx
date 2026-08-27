@@ -38,13 +38,13 @@ export default function PrivacyPage() {
         <section>
           <h2 id="where-data-lives">Where data lives</h2>
           <p>
-            The extension only runs on local development pages (
-            <code>localhost</code> and <code>127.0.0.1</code>). Annotations you
+            The toolbar is injected on http and https pages. Annotations you
             create are stored in that page&apos;s <code>localStorage</code>, on
-            your machine.
+            your machine. They never leave the browser unless you copy them or
+            you are running the optional local MCP server.
           </p>
           <p>
-            If you are running the optional Agentation MCP server locally, the
+            If you are running the Agentation MCP server locally, the
             extension may send annotation data to{" "}
             <code>http://localhost:4747</code>. That server runs on your
             computer. Nothing is sent to Agentation or any third party.
@@ -54,9 +54,10 @@ export default function PrivacyPage() {
         <section>
           <h2 id="permissions">Permissions</h2>
           <p>
-            Host access is limited to local development URLs so the toolbar can
-            appear on your own projects and, if present, talk to a local MCP
-            server. The extension cannot read or change other websites.
+            The extension needs access to http and https pages so it can show
+            the toolbar and read the element you click (tag, CSS classes,
+            position). It does not read your cookies, account data, or form
+            passwords. It does not run on the Chrome Web Store.
           </p>
         </section>
 
