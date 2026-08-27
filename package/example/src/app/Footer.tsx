@@ -27,7 +27,10 @@ export function Footer() {
           Alex Vanderzon
         </a>
       </p>
-      <a href="/colophon">Colophon</a>
+      <span style={{ display: "flex", gap: 16 }}>
+        <a href="/privacy">Privacy</a>
+        <a href="/colophon">Colophon</a>
+      </span>
     </footer>
   );
 }

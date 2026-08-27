@@ -4,6 +4,7 @@ Monorepo containing:
 
 1. **npm package** (`package/`) - See `package/AGENTS.md`
 2. **Website/docs** (`package/example/`) - See `package/example/AGENTS.md`
+3. **Chrome extension** (`extension/`) - See `extension/README.md`
 
 ## What is Agentation?
 
@@ -12,9 +13,10 @@ A floating toolbar for annotating web pages and collecting structured feedback f
 ## Development
 
 ```bash
-pnpm install    # Install all workspace dependencies
-pnpm dev        # Run both package watch + website dev server
-pnpm build      # Build package only
+pnpm install            # Install all workspace dependencies
+pnpm dev                # Run both package watch + website dev server
+pnpm build              # Build package only
+pnpm extension:build    # Bundle the Chrome extension content script
 ```
 
 ## Important

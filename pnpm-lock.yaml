@@ -8,6 +8,37 @@ importers:
 
   .: {}
 
+  extension:
+    dependencies:
+      agentation:
+        specifier: workspace:*
+        version: link:../package
+    devDependencies:
+      '@types/react':
+        specifier: ^18.2.0
+        version: 18.3.28
+      '@types/react-dom':
+        specifier: ^18.2.0
+        version: 18.3.7(@types/react@18.3.28)
+      esbuild:
+        specifier: ^0.27.0
+        version: 0.27.2
+      postcss:
+        specifier: ^8.5.6
+        version: 8.5.6
+      postcss-modules:
+        specifier: ^6.0.1
+        version: 6.0.1(postcss@8.5.6)
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.3.1(react@18.3.1)
+      sass:
+        specifier: ^1.97.2
+        version: 1.97.3
+
   mcp:
     dependencies:
       '@modelcontextprotocol/sdk':

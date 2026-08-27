@@ -1,0 +1,33 @@
+# Chrome Extension
+
+Use Agentation on any localhost page without adding it to your project.
+
+## Install from release
+
+Download `agentation-extension.zip` from [Releases](https://github.com/kacperkwapisz/agentation/releases), unzip, then:
+`chrome://extensions` → Developer mode → Load unpacked → select the folder.
+
+The toolbar is injected automatically on `localhost` / `127.0.0.1` pages. If the page already mounts `<Agentation />`, the extension stays out of the way.
+
+## Build from source
+
+```bash
+pnpm extension:build
+```
+
+Then `chrome://extensions` → Developer mode → Load unpacked → select the `extension/` folder.
+
+Watch mode (rebuilds on package or extension changes):
+
+```bash
+pnpm extension:watch
+```
+
+## Chrome Web Store
+
+Listing copy, permission justifications, and screenshot notes: [STORE.md](./STORE.md).
+
+```bash
+pnpm extension:zip
+./extension/publish-chrome-store.sh
+```
