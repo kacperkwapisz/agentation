@@ -2,8 +2,9 @@
   "manifest_version": 3,
   "name": "Agentation",
   "description": "Visual feedback tool for AI coding agents. Annotate elements, add notes, copy structured output.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage_url": "https://github.com/kacperkwapisz/agentation",
+  "permissions": ["storage", "activeTab"],
   "host_permissions": [
     "http://*/*",
     "https://*/*"

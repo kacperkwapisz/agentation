@@ -23,13 +23,15 @@ Agentation
 ## Short description (132 characters max)
 
 ```
-Annotate any web page and copy structured feedback for AI coding agents. Nothing to add to your project.
+Annotate any web page and copy structured feedback for AI coding agents. Off until you turn it on.
 ```
 
 ## Detailed description
 
 ```
-A floating toolbar on the current page. Click an element, leave a note, copy markdown with the CSS selector and where it sits on the page. Paste that into Claude Code, Cursor, Codex, or any other agent.
+A floating toolbar on the current page. It stays hidden until you enable it for that site in the extension popup. Chrome remembers the origin, so coming back to example.com brings the toolbar back.
+
+Click an element, leave a note, copy markdown with the CSS selector and where it sits on the page. Paste that into Claude Code, Cursor, Codex, or any other agent.
 
 This is the same toolbar as `npm install agentation`. If the page already renders <Agentation />, the extension does not mount a second copy.
 
@@ -47,15 +49,19 @@ English
 ## Single purpose
 
 ```
-Show the Agentation toolbar on web pages so you can annotate them and copy selectors for an AI coding agent.
+Let you turn on the Agentation toolbar on a site, annotate the page, and copy selectors for an AI coding agent.
 ```
 
 ## Permission justifications
 
+`storage`: remembers which site origins you enabled the toolbar on.
+
+`activeTab`: lets the popup talk to the current tab when you click Enable.
+
 Host permissions (`http://*/*`, `https://*/*`):
 
 ```
-Needed to inject the toolbar on the page you are looking at, read the element you click (tag, classes, position), and ping http://localhost:4747/health if you are running the Agentation MCP server. The extension does not collect that data or send it off your machine.
+Needed so the toolbar can appear after you enable a site, read the element you click (tag, classes, position), and ping http://localhost:4747/health if you are running the Agentation MCP server. The toolbar does not show until you turn it on for that origin. The extension does not collect that data or send it off your machine.
 ```
 
 Remote code: none. Data use: none.

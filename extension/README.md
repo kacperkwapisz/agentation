@@ -7,7 +7,7 @@ Use Agentation on any web page without adding it to your project.
 Download `agentation-extension.zip` from [Releases](https://github.com/kacperkwapisz/agentation/releases), unzip, then:
 `chrome://extensions` → Developer mode → Load unpacked → select the folder.
 
-The toolbar is injected on http and https pages. If the page already mounts `<Agentation />`, the extension stays out of the way.
+The toolbar stays off until you enable it for the current site from the extension popup. Chrome remembers that origin. If the page already mounts `<Agentation />`, the extension stays out of the way.
 
 ## Build from source
 

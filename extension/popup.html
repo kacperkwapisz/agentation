@@ -10,7 +10,6 @@
       font-family: system-ui, -apple-system, sans-serif;
       background: #fff;
       color: #111;
-      /* outer_radius = inner_radius (8px) + padding (16px) = 24px */
       border-radius: 24px;
     }
     h1 {
@@ -23,6 +22,12 @@
       color: rgba(0,0,0,0.5);
       line-height: 1.5;
       margin-bottom: 12px;
+    }
+    .origin {
+      font-size: 11px;
+      color: rgba(0,0,0,0.4);
+      margin: -6px 0 12px;
+      word-break: break-all;
     }
     .status {
       display: flex;
@@ -45,11 +50,34 @@
     .dot.inactive { background: rgba(0,0,0,0.15); }
     .label { color: rgba(0,0,0,0.5); }
     .value { color: #111; margin-left: auto; }
+    button {
+      width: 100%;
+      margin-top: 12px;
+      padding: 8px 10px;
+      border: 0;
+      border-radius: 8px;
+      background: #111;
+      color: #fff;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    button[disabled] {
+      background: rgba(0,0,0,0.12);
+      color: rgba(0,0,0,0.35);
+      cursor: default;
+    }
+    button.off {
+      background: rgba(0,0,0,0.06);
+      color: #111;
+    }
   </style>
 </head>
 <body>
   <h1>Agentation</h1>
   <p>Visual feedback for AI coding agents</p>
+  <div class="origin" id="origin"></div>
 
   <div class="status" id="toolbar-status">
     <span class="dot inactive" id="toolbar-dot"></span>
@@ -61,6 +89,8 @@
     <span class="label">MCP Server</span>
     <span class="value" id="mcp-value">Checking...</span>
   </div>
+
+  <button id="toggle" type="button" disabled>Enable on this site</button>
 
   <script src="popup.js"></script>
 </body>

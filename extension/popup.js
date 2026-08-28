@@ -3,37 +3,44 @@ const toolbarValue = document.getElementById("toolbar-value");
 const mcpStatus = document.getElementById("mcp-status");
 const mcpDot = document.getElementById("mcp-dot");
 const mcpValue = document.getElementById("mcp-value");
+const toggle = document.getElementById("toggle");
+const originEl = document.getElementById("origin");
 
-function isInjectable(url) {
-  if (!url) return false;
-  try {
-    const { protocol, hostname } = new URL(url);
-    if (protocol !== "http:" && protocol !== "https:") return false;
-    if (hostname === "chrome.google.com" || hostname === "chromewebstore.google.com") {
-      return false;
-    }
-    return true;
-  } catch {
-    return false;
-  }
+let tabId = null;
+let enabled = false;
+
+function setToolbarState(active, label) {
+  toolbarDot.className = active ? "dot active" : "dot inactive";
+  toolbarValue.textContent = label;
 }
 
-chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-  const url = tabs[0]?.url || "";
-  const isActive = isInjectable(url);
+function setUnavailable(label) {
+  setToolbarState(false, label);
+  mcpStatus.style.display = "none";
+  toggle.disabled = true;
+  toggle.textContent = "Unavailable on this page";
+}
 
-  if (isActive) {
-    toolbarDot.className = "dot active";
-    toolbarValue.textContent = "Active";
-    checkMcpHealth();
-  } else {
-    toolbarDot.className = "dot inactive";
-    toolbarValue.textContent = "Inactive";
-    mcpStatus.style.display = "none";
-  }
-});
+function renderToggle() {
+  toggle.disabled = false;
+  toggle.className = enabled ? "off" : "";
+  toggle.textContent = enabled ? "Disable on this site" : "Enable on this site";
+}
+
+function send(message) {
+  return new Promise((resolve, reject) => {
+    chrome.tabs.sendMessage(tabId, message, (response) => {
+      if (chrome.runtime.lastError) {
+        reject(new Error(chrome.runtime.lastError.message));
+        return;
+      }
+      resolve(response);
+    });
+  });
+}
 
 function checkMcpHealth() {
+  mcpStatus.style.display = "";
   fetch("http://localhost:4747/health")
     .then((res) => {
       if (res.ok) {
@@ -49,3 +56,55 @@ function checkMcpHealth() {
       mcpValue.textContent = "Not running";
     });
 }
+
+chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
+  const tab = tabs[0];
+  tabId = tab?.id ?? null;
+  const url = tab?.url || "";
+
+  try {
+    const parsed = new URL(url);
+    originEl.textContent = parsed.origin;
+  } catch {
+    originEl.textContent = "";
+  }
+
+  if (!tabId) {
+    setUnavailable("Inactive");
+    return;
+  }
+
+  try {
+    const state = await send({ type: "get-state" });
+    if (state.hasOwnToolbar) {
+      setToolbarState(true, "Page already has it");
+      mcpStatus.style.display = "none";
+      toggle.disabled = true;
+      toggle.textContent = "Already on this page";
+      return;
+    }
+
+    enabled = Boolean(state.enabled);
+    setToolbarState(enabled, enabled ? "On" : "Off");
+    renderToggle();
+    if (enabled) checkMcpHealth();
+    else mcpStatus.style.display = "none";
+  } catch {
+    setUnavailable("Inactive");
+  }
+});
+
+toggle.addEventListener("click", async () => {
+  if (toggle.disabled || tabId == null) return;
+  toggle.disabled = true;
+  try {
+    const state = await send({ type: "set-enabled", enabled: !enabled });
+    enabled = Boolean(state.enabled);
+    setToolbarState(enabled, enabled ? "On" : "Off");
+    renderToggle();
+    if (enabled) checkMcpHealth();
+    else mcpStatus.style.display = "none";
+  } catch {
+    setUnavailable("Inactive");
+  }
+});
